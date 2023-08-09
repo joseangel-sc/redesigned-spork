@@ -7,7 +7,7 @@ terminal:
 	docker run -it --rm -v $(PWD)/src:/app/src -v $(PWD)/tests:/app/tests $(IMAGE_NAME) /bin/bash
 
 run:
-	docker run -it --rm $(IMAGE_NAME) python src/ploting_floats.py
+	docker run -it --rm $(IMAGE_NAME) python /app/src/ploting_floats.py
 
-tests:
-	docker run -it --rm $(IMAGE_NAME) python tests/src/your_test_script.py
+testing:
+	docker run -it --rm -e PYTHONPATH=/app -v $(PWD)/src:/app/src -v $(PWD)/tests:/app/tests $(IMAGE_NAME) pytest -s /app/tests/src/test_ploting_floats.py
